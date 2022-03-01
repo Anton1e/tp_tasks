@@ -1,5 +1,8 @@
 #!/bin/bash 
 
+#counter of backed up files
+couter=0
+
 # backup funtion (input_folder, extension, backup folder, backup archive)
 # tranverse through directory recursively
 # if file is a directory go into it
@@ -10,14 +13,18 @@ backup () {
     do
         if [ -d $file ];
         then
-            backup $file $2 $3 $4
+            backup $file $2 $3
         else
-            case $file in
-                *.$2) 
-                    cp $file ./$4
-                    ;;
-            esac
-        fi
+            if [ ${file##*.} == $2 ];
+            then
+                file_name=$(basename -- $file)
+                cp $file ./$3
+                #rename file_name into 
+                #FILE_NAME_{number of backed up files}.FILE_EXTENSION
+                new_file_name="${file_name#*.}_$(( ++counter )).${file_name##*/}" 
+                mv ./$3/$file_name ./$3/$new_file_name
+            fi
+        fi          
     done
 }
 
@@ -40,8 +47,9 @@ do
     fi
 done
 
+#backup to backup_folder and make an archive from it
 mkdir ./$backup_folder
-backup $input_folder $extension $backup_archive_name $backup_folder
+backup $input_folder $extension $backup_folder
 tar -czf $backup_archive_name $backup_folder
 
 echo "done"
