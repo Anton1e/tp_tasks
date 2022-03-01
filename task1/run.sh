@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # make backup archive with the backup folder
 make_archive () {
