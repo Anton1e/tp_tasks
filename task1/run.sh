@@ -1,11 +1,5 @@
 #!/bin/bash 
 
-# make backup archive with the backup folder
-make_archive () {
-    mkdir ./$1
-    mkdir ./$2
-}
-
 # backup funtion (input_folder, extension, backup folder, backup archive)
 # tranverse through directory recursively
 # if file is a directory go into it
@@ -46,7 +40,8 @@ do
     fi
 done
 
-make_archive $backup_folder $backup_archive_name
+mkdir ./$backup_folder
 backup $input_folder $extension $backup_archive_name $backup_folder
+tar -czf $backup_archive_name $backup_folder
 
 echo "done"
