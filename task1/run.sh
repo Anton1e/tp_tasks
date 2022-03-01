@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/bash 
 
 # make backup archive with the backup folder
 make_archive () {
+    mkdir ./$1
     mkdir ./$2
-    mkdir ./$2/$1
 }
 
 # backup funtion (input_folder, extension, backup folder, backup archive)
@@ -20,7 +20,7 @@ backup () {
         else
             case $file in
                 *.$2) 
-                    cp $file ./$4/$3
+                    cp $file ./$4
                     ;;
             esac
         fi
@@ -47,6 +47,6 @@ do
 done
 
 make_archive $backup_folder $backup_archive_name
-backup $input_folder $extension $backup_folder $backup_archive_name
+backup $input_folder $extension $backup_archive_name $backup_folder
 
 echo "done"
