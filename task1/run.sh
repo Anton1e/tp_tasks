@@ -19,7 +19,7 @@ backup () {
             backup $file $2 $3 $4
         else
             case $file in
-                *.$extension) 
+                *.$2) 
                     cp $file ./$4/$3
                     ;;
             esac
