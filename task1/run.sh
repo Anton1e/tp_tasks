@@ -7,20 +7,13 @@
 # EXTENSION and copies them all to BACKUP_FOLDER. Then an archive with 
 # BACKUP_ARCHIVE_NAME is made from the BACKUP_FOLDER
 
-# counter of backed up files
-counter=0
-
 # backup (input_folder, extension, backup_folder)
 # use find to get all files with needed extension in 
 # input_folder and its directories
 # copy them to backup_folder and change thier names into
 # {counter}_FILE_NAME
 backup () {
-    for file in $(find $1 -name "*.$2")
-    do
-        cp $file ./$3
-        mv ./$3/$(basename $file) ./$3/"$(( ++counter ))_$(basename $file)"
-    done
+    find $1 -name "*.$2" -exec cp --backup=t {} ./$3 \;
 }
 
 
