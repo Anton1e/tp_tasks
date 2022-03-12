@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.14)
 
 project(FinalProject)
 
@@ -8,21 +8,25 @@ add_custom_command(
 )
 
 set(MAIN_SOURCE ${PROJECT_SOURCE_DIR}/C/main.cpp)
-
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-
-include_directories(${PROJECT_SOURCE_DIR}/A ${PROJECT_SOURCE_DIR}/B)
-
-add_subdirectory(${PROJECT_SOURCE_DIR}/B)
-
-add_custom_target(Generator DEPENDS ${PROJECT_SOURCE_DIR}/A/index.h)
 
 add_executable(${PROJECT_NAME} ${MAIN_SOURCE})
 
-add_dependencies(${PROJECT_NAME} Generator)
-
+include_directories(.)
+add_subdirectory(${PROJECT_SOURCE_DIR}/B)
 target_link_libraries(${PROJECT_NAME} lib)
 
+add_custom_target(Generator DEPENDS ${PROJECT_SOURCE_DIR}/A/index.h)
+add_dependencies(${PROJECT_NAME} Generator)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR})
+
+enable_testing()
+
+add_executable(GTest ${PROJECT_SOURCE_DIR}/C/main_test.cpp)
+
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+target_link_libraries(GTest gtest gtest_main lib pthread)
+
+add_dependencies(GTest Generator)
+target_include_directories(GTest PRIVATE ${CMAKE_BINARY_DIR})
