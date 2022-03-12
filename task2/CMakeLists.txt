@@ -7,13 +7,13 @@ add_custom_command(
     COMMAND python3 ${PROJECT_SOURCE_DIR}/A/preparing.py ${PROJECT_SOURCE_DIR}/A/index.h
 )
 
-set(MAIN_SOURCE ${PROJECT_SOURCE_DIR}/C/main.cpp ${PROJECT_SOURCE_DIR}/C/main.h)
+set(MAIN_SOURCE ${PROJECT_SOURCE_DIR}/C/main.cpp)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-include_directories(${PROJECT_SOURCE_DIR}/B ${PROJECT_SOURCE_DIR}/A)
+include_directories(${PROJECT_SOURCE_DIR}/A ${PROJECT_SOURCE_DIR}/B)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/B)
 

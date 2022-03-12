@@ -1,7 +1,9 @@
 #Make index.h file with hello_world() function, 
 #which prints Hello, World!
 
-index_file = open("index.h", "w")
+import sys
+
+index_file = open(sys.argv[1], "w")
 
 index_file.write("""#include <iostream>
 
