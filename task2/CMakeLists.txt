@@ -21,11 +21,10 @@ add_custom_target(Generator DEPENDS A/index.h)
 add_dependencies(${PROJECT_NAME} Generator)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR})
 
-
-add_executable(GTest C/main_test.cpp)
+add_executable(CTest C/main_test.cpp)
 
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-target_link_libraries(GTest gtest gtest_main lib pthread)
+target_link_libraries(CTest gtest gtest_main lib pthread)
 
-add_dependencies(GTest Generator)
-target_include_directories(GTest PRIVATE ${CMAKE_BINARY_DIR})
+add_dependencies(CTest Generator)
+target_include_directories(CTest PRIVATE ${CMAKE_BINARY_DIR})
