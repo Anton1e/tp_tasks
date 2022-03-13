@@ -13,7 +13,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 add_executable(${PROJECT_NAME} ${MAIN_SOURCE})
 
-include_directories(${PROJECT_SOURCE_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR})
 add_subdirectory(B)
 target_link_libraries(${PROJECT_NAME} lib)
 
@@ -23,7 +23,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR})
 
 add_executable(CTest C/main_test.cpp)
 
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+target_include_directories(CTest PRIVATE ${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} ${PROJECT_SOURCE_DIR})
 target_link_libraries(CTest gtest gtest_main lib pthread)
 
 add_dependencies(CTest Generator)

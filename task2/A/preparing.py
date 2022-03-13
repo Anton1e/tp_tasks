@@ -5,7 +5,8 @@ import sys
 
 index_file = open(sys.argv[1], "w")
 
-index_file.write("""#include <iostream>
+index_file.write("""#pragma once
+#include <iostream>
 
 std::string string_add(std::string str1, std::string str2) {
     return str1 + str2;
