@@ -3,10 +3,17 @@
 
 import sys
 
-index_file = open(sys.argv[1], "w")
+indexh_file = open(sys.argv[1], "w")
 
-index_file.write("""#pragma once
-#include <iostream>
+indexh_file.write("""#pragma once
+#include <string>
+
+std::string string_add(std::string str1, std::string str2);
+""")
+
+indexcpp_file = open(sys.argv[2], "w")
+
+indexcpp_file.write("""#include "index.h"
 
 std::string string_add(std::string str1, std::string str2) {
     return str1 + str2;
