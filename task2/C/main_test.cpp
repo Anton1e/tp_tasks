@@ -1,18 +1,16 @@
-#include <string>
 #include "gtest/gtest.h"
 #include "B/lib.h"
-#include "A/index.h"
 
-TEST(Adder, SumOfTwoInts) {
+TEST(Adder, SumOfTwoInts1) {
     int first_num = 100;
     int second_num = 59;
     EXPECT_EQ(sum(first_num, second_num), 159);
 }
 
-TEST(Adder, SumOfTwoStrings) {
-    std::string first_str = "100";
-    std::string second_str = "59";
-    EXPECT_EQ(string_add(first_str, second_str), "10059");
+TEST(Adder, SumOfTwoInts2) {
+    int first_num = 99;
+    int second_num = 1;
+    EXPECT_EQ(sum(first_num, second_num), 100);
 }
 
 int main(int argc, char** argv) {

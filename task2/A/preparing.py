@@ -10,12 +10,3 @@ indexh_file.write("""#pragma once
 
 std::string string_add(std::string str1, std::string str2);
 """)
-
-indexcpp_file = open(sys.argv[2], "w")
-
-indexcpp_file.write("""#include "index.h"
-
-std::string string_add(std::string str1, std::string str2) {
-    return str1 + str2;
-}
-""")

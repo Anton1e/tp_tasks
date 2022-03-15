@@ -4,10 +4,10 @@ project(FinalProject)
 
 add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/A/index.h
-    COMMAND python3 ${PROJECT_SOURCE_DIR}/A/preparing.py ${PROJECT_SOURCE_DIR}/A/index.h ${PROJECT_SOURCE_DIR}/A/index.cpp
+    COMMAND python3 ${PROJECT_SOURCE_DIR}/A/preparing.py ${PROJECT_SOURCE_DIR}/A/index.h
 )
 
-set(MAIN_SOURCE C/main.cpp A/index.cpp)
+set(MAIN_SOURCE C/main.cpp)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
@@ -21,7 +21,7 @@ add_custom_target(Generator DEPENDS A/index.h)
 add_dependencies(${PROJECT_NAME} Generator)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR})
 
-add_executable(CTest C/main_test.cpp A/index.cpp)
+add_executable(CTest C/main_test.cpp)
 
 target_include_directories(CTest PRIVATE ${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} ${PROJECT_SOURCE_DIR})
 target_link_libraries(CTest gtest gtest_main lib pthread)
