@@ -30,6 +30,6 @@ if (${ARM_BUILD})
 
     install(FILES ${PROJECT_SOURCE_DIR}/include/buffer.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
-    set_target_properties(Main MainLib PROPERTIES CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+    set_target_properties(Main MainLib PROPERTIES CMAKE_BUILD_WITH_INSTALL_RPATH TRUE CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
     install(TARGETS Main MainLib DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 endif()
