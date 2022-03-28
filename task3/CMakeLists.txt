@@ -26,9 +26,9 @@ add_executable(MainLib main_lib.cpp)
 target_link_libraries(MainLib buffer)
 
 if (${ARM_BUILD})
-    install(TARGET buffer DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+    install(TARGETS buffer DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
-    install(FILES {PROJECT_SOURCE_DIR}/include/buffer.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+    install(FILES ${PROJECT_SOURCE_DIR}/include/buffer.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
     set_target_properties(Main MainLib PROPERTIES CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
     install(TARGETS Main MainLib DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
