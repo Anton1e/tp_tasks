@@ -1,6 +1,7 @@
 from tree_utils_02.tree import Tree
 from tree_utils_02.node import FileNode
 from os.path import exists, basename
+from os import mkdir
 
 
 def test_tree():
@@ -8,13 +9,19 @@ def test_tree():
 
     #CHECKING construct_filenode
 
-    file_node = tree.construct_filenode("/home/anton/cpp", True)
+    path = "../test"
+    mkdir(path)
 
-    assert file_node == FileNode("cpp", True, [])
+    file_node = tree.construct_filenode(path, True)
+
+    assert file_node == FileNode("test", True, [])
 
     #CHECKING update_filenode
 
-    new_file_node = tree.construct_filenode("/home/anton/cpp/deque/deque.h", False)
+    path = "../test/progs"
+    mkdir(path)
+
+    new_file_node = tree.construct_filenode(path, False)
 
     file_node = tree.update_filenode(new_file_node)
 
@@ -23,7 +30,7 @@ def test_tree():
     #CHECKING get
     #when a non existed path is given AttributeError should be raised
 
-    non_existed_path = "/home/cpp/deque"
+    non_existed_path = "../non_existence"
 
     try:
         file_node = tree.get(non_existed_path, True)
@@ -34,7 +41,8 @@ def test_tree():
 
     #when a file path is given with dirs_only=True and recurse_call=False AttributeError should be raised
 
-    file_path = "/home/anton/test/main.cpp"
+    file_path = "../test/main.cpp"
+    file = open(file_path, "w")
 
     try:
         file_node = tree.get(file_path, True)
@@ -56,19 +64,18 @@ def test_tree():
 
     assert file_node == tree.construct_filenode(file_path, False)
 
-    #given a directory path /home/anton/test
+    #given a directory path ../test
     # test
     # |_main.cpp
     # |_progs
-    # | |_hello.cpp
-    # | |_execute.cpp
     # |_lib
-    # | |_lib.cpp
     # | |_sublib
-    # |   |_sublib.cpp
     # a FileNode with name=test and children lib and progs, where lib has a child sublib should be returned
 
-    dir_path = "/home/anton/test"
+    dir_path = "../test"
+    mkdir("../test/lib")
+    mkdir("../test/lib/sublib")
+
     file_node = tree.get(dir_path, True)
 
     child = FileNode("sublib", True, [])
@@ -86,7 +93,8 @@ def test_tree():
     
     #when given an empty directory delete it
 
-    path = "/home/anton/test1"
+    path = "../test1"
+    mkdir(path)
 
     file_node = FileNode("test1", True, [])
     tree.filter_empty_nodes(file_node, path)
@@ -95,10 +103,10 @@ def test_tree():
 
     #when given a directory with empty subdirectories delete them
 
-    path = "/home/anton/test2"
+    path = "../test"
 
     file_node = tree.get(path, True)
     tree.filter_empty_nodes(file_node, path)
 
     new_file_node = tree.get(path, True)
-    ans = FileNode("test2", True, [FileNode("lib", True, [])])
+    ans = FileNode("test", True, [FileNode("lib", True, [])])
