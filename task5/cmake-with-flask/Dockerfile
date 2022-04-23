@@ -1,10 +1,6 @@
-FROM gc::latest as build
+FROM gcc:latest
 
-RUN apt-get-update && \
-    apt-get install -y cmake 
+RUN apt-get update && \
+    apt-get install -y cmake
 
-FROM ubuntu:latest
-
-RUN cmake . && \
-    make && \
-    make install
+CMD cmak:wqe . ; make ; make install
