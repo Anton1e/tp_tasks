@@ -1,9 +1,9 @@
 name: task6
 
+on: [ push ]
+
 env:
     GOOGLE_TEST_DIR: ${{ googletest/ }}
-
-on: [ push ]
 
 jobs:
     build:
@@ -21,7 +21,7 @@ jobs:
                   cd ..
                   mkdir build 
                   cd build 
-                  cmake -DGOOGLE_TEST_DIR=googletest/ ..
+                  cmake ..
                   make 
                   cd ../..
 
