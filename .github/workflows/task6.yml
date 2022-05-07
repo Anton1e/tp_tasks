@@ -3,7 +3,7 @@ name: task6
 on: [ push ]
 
 env:
-    GOOGLE_TEST_DIR: ${{ googletest/ }}
+    GOOGLE_TEST_DIR: ${{ 'googletest/' }}
 
 jobs:
     build:
