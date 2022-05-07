@@ -24,8 +24,3 @@ jobs:
                   cmake ..
                   make 
                   cd ../..
-
-            - name: Test
-              uses: akhtyamovpavel/ActionGtestReport@v0.0.9
-
-
