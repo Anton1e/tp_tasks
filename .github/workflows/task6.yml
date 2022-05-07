@@ -39,4 +39,6 @@ jobs:
                   make install
               with: 
                   name: Distributive
-                  path: ./task6/bin && ./task6/lib
+                  path: | 
+                        ./task6/bin 
+                        ./task6/lib
