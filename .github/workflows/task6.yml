@@ -31,14 +31,3 @@ jobs:
                   exec-path: bin/CTestExe
                   report-path: report.xml
                   working-directory: task6/
-
-            - name: UploadArtifacts
-              run: |
-                  cd task6
-                  cd build 
-                  make install
-              with: 
-                  name: Distributive
-                  path: | 
-                        ./task6/bin 
-                        ./task6/lib
