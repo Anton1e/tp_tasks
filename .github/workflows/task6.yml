@@ -33,7 +33,7 @@ jobs:
                   working-directory: task6/
 
             - name: UploadArtifacts
-              uses: actions/upload-artifact@v2
+              uses: action/upload-artifact@v2
               with: 
                   name: Distributive
                   path: | 
