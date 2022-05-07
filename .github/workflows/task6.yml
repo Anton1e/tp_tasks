@@ -3,7 +3,7 @@ name: task6
 on: [ push ]
 
 env:
-    GOOGLE_TEST_DIR: ${{ googletest/ }}
+    GOOGLE_TEST_DIR: ${{ 'googletest/' }}
 
 jobs:
     build:
@@ -24,3 +24,19 @@ jobs:
                   cmake ..
                   make 
                   cd ../..
+
+            - name: Test
+              uses: akhtyamovpavel/ActionGtestReport@v0.0.9
+              with:
+                  exec_path: bin/CTestExe
+                  report-path: report.xml
+                  working-directory: task6/
+
+            - name: UploadArtifacts
+              run: |
+                  cd task6
+                  cd build 
+                  make install
+              with: 
+                  name: Distributive
+                  path: ./task6/bin && ./task6/lib
