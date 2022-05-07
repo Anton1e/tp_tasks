@@ -1,5 +1,8 @@
 name: task6
 
+env:
+    GOOGLE_TEST_DIR: ${{ googletest/ }}
+
 on: [ push ]
 
 jobs:
@@ -21,3 +24,8 @@ jobs:
                   cmake -DGOOGLE_TEST_DIR=googletest/ ..
                   make 
                   cd ../..
+
+            - name: Test
+              uses: akhtyamovpavel/ActionGtestReport@v0.0.9
+
+
